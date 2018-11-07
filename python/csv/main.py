@@ -1,0 +1,30 @@
+import csv
+from datetime import datetime
+
+class Record(object):
+    def __init__(self, row):
+        self.id = eval(row[0])
+        
+        x = row[1].split('-')
+        self.d = datetime.strptime(row[1],'%Y-%m-%d')
+        
+    def __str__(self):
+        return f"{str(self.id)} - {self.d.strftime('%Y-%m-%d')}"
+        
+    def has_id(self):
+        return self.id != 0
+    
+
+def read_file():
+     with open('data.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        arr = []
+        for row in reader:
+            x = Record(row)
+            arr.append(x)
+        
+        arr = sorted(arr,key=lambda x: x.id)
+        print("\n".join([ str(x) for x in arr if x.has_id() ]))
+
+if __name__=='__main__':
+    read_file()
