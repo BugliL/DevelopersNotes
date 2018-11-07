@@ -1,4 +1,6 @@
 
+# Reference
+# https://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
 
 class SingleTone(object):
     __instance = None
